@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t ikaybraz/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true ikaybraz/react-test npm  test
+
+after_success:
+  - docker build -t ikaybraz/multi-client ./client
+  - docker build -t ikaybraz/multi-nginx ./nginx
+  - docker build -t ikaybraz/multi-server ./server
+  - docker build -t ikaybraz/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push ikaybraz/multi-client
+  - docker push ikaybraz/multi-nginx
+  - docker push ikaybraz/multi-server
+  - docker push ikaybraz/multi-worker
