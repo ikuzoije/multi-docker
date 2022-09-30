@@ -12,15 +12,15 @@ services:
       - api
       - client
     build:
-      #dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
-      dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
+      dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
+      #dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
       context: ./nginx
     ports:
       - '3050:80'
   api:
     build:
-      #dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
-      dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
+      dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
+      #dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
       context: ./server
     volumes:
       - /app/node_modules
@@ -35,8 +35,8 @@ services:
       - PGPORT=5432
   client:
     build:
-      #dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
-      dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
+      dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
+      #dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
       context: ./client
     volumes:
       - /app/node_modules
@@ -45,8 +45,8 @@ services:
       - WDS_SOCKET_PORT=0
   worker:
     build:
-      #dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
-      dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
+      dockerfile: Dockerfile #(when deploying in AWS Elastic Beanstalk)
+      #dockerfile: Dockerfile.dev #(saved copy to be used locally). For testing, use the first one, (elastic beanstalk implementation)
       context: ./worker
     volumes:
       - /app/node_modules
